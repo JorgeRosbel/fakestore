@@ -3,20 +3,19 @@ import axios from 'axios';
 import { Product } from './api.types';
 
 
-interface Params{
-  titleParam:string;
-  price_minParam:string;
-  price_maxParam:string;
+export interface Params{
+  titleParam?:string;
+  price_minParam?:string;
+  price_maxParam?:string;
+  categoryId?:string;
 }
 
 
-export const useFetchProducts = ({ titleParam,price_minParam,price_maxParam  }: Params ) => {
+export const useFetchProducts = ({ titleParam,price_minParam,price_maxParam,categoryId  }: Params ) => {
   const fetchFn = async ({ pageParam = 0 }: { pageParam: number }): Promise<Product[]> => {
-    console.log("Call API REST");
-    // const endpoint = `https://api.escuelajs.co/api/v1/products?offset=${pageParam}&limit=8&title=${titleParam}&price_min=${price_minParam}&price_max=${price_maxParam}`;
-    const endpoint = `https://api.escuelajs.co/api/v1/products?offset=${pageParam}&limit=8${titleParam ? `&title=${encodeURIComponent(titleParam)}` : ''}${price_minParam ? `&price_min=${price_minParam}` : ''}${price_maxParam ? `&price_max=${price_maxParam}` : ''}`;
+    const endpoint = `https://api.escuelajs.co/api/v1/products?offset=${pageParam}&limit=8${titleParam ? `&title=${encodeURIComponent(titleParam)}` : ''}${price_minParam ? `&price_min=${price_minParam}` : ''}${price_maxParam ? `&price_max=${price_maxParam}` : ''}${categoryId ? `&categoryId=${categoryId}` : ''}`;
 
-
+    console.log(endpoint)
     try {
       const response = await axios.get<Product[]>(endpoint);
       return response.data;
@@ -29,7 +28,7 @@ export const useFetchProducts = ({ titleParam,price_minParam,price_maxParam  }: 
   };
 
   return useInfiniteQuery({
-    queryKey: ["products", titleParam, price_minParam, price_maxParam],
+    queryKey: ["products", titleParam, price_minParam, price_maxParam,categoryId],
     queryFn: fetchFn,
     initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => {
