@@ -3,15 +3,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
+export const Spinner:React.FC<{isLoading:boolean}> = ({isLoading}) =>{
+
+    return <div className={`${isLoading ? "block" : "hidden"} bg-light-accent dark:bg-dark-accent w-full h-full flex items-center justify-center`}>
+    <div className="w-[70px] h-[70px] border-solid border-[5px] border-light-secondary border-t-black dark:border-dark-white dark:border-t-yellow-500 rounded-full animate-spin"></div>
+</div>
+}
+
 export const Image:React.FC<Omit<Promo, "category" | "price" >> = ({image,title}) => {
     const [isLoading,setIsloading] = useState<boolean>(true);
     const handleLoadImage = () => setIsloading(false);
 
     return (
         <div className="w-[80%] min-h-[200px] min-w-[200px]" >
-            {isLoading && <div className="bg-light-accent dark:bg-dark-accent w-full h-full flex items-center justify-center">
-                <div className="w-[70px] h-[70px] border-solid border-[5px] border-light-secondary border-t-black dark:border-dark-white dark:border-t-yellow-500 rounded-full animate-spin"></div>
-            </div>}
+            <Spinner isLoading={isLoading}/>
             <Link to={`/fakestore/products/${title}`} className="relative">
             <img onLoad={handleLoadImage}
                 src={image}

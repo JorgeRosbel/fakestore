@@ -1,41 +1,14 @@
 import { useFetchProducts } from "../../api/useFetchProducts";
 import { ProductCard } from "./card";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { FormFilter } from "./formFilter";
 import { useFilter } from "../../hooks/useFilter";
-
-
-const useNear = () => {
-    const [isNear,setNear] = useState<boolean>(false);
-  
-    useEffect(() => {
-        const handleScroll = () => {
-          const scrollTop = window.scrollY;
-          const windowHeight = window.innerHeight;
-          const documentHeight = document.documentElement.scrollHeight;
-      
-          if (scrollTop + windowHeight >= documentHeight) {
-            console.log("Has llegado al final de la página.");
-            setNear(true);
-            console.log(true)
-           
-          }else{
-            if(isNear !== false){setNear(false)}
-            console.log(false)
-          }
-        };
-      
-        window.addEventListener("scroll", handleScroll);
-      
-        return () => {
-          window.removeEventListener("scroll", handleScroll);
-        };
-      }, [isNear]);
-
-    return {isNear,setNear}
-}
+import { useInView } from "react-intersection-observer";
+import { Params } from "../../api/useFetchProducts";
+import { Spinner } from "./imageCard";
 
 export const Prodcuts:React.FC = () => {
+    const {title,price_max,price_min} = useFilter();
 
     return(
         <section id="--promo" className="w-full flex flex-col items-center min-h-custom max-w-[1200px] mt-10 mb-3">
@@ -45,7 +18,9 @@ export const Prodcuts:React.FC = () => {
             </div>
             <div className="flex w-full items-start gap-3 relative">
                 <FormFilter isLoading={false}/>
-                <Pagination />
+                <Pagination titleParam={title}
+                            price_minParam={price_min}
+                            price_maxParam={price_max} />
             </div>
            
         </section>
@@ -53,22 +28,21 @@ export const Prodcuts:React.FC = () => {
 }
 
 
-const Pagination: React.FC = () => {
+export const Pagination: React.FC<Params> = ({titleParam,price_minParam,price_maxParam,categoryId}) => {
 
-  //hasNextPage,
-  //isFetching,
-  //isFetchingNextPage,
+ 
+ 
+  const { data,fetchNextPage, status, error } = useFetchProducts({ titleParam, price_minParam,price_maxParam,categoryId });
+  const { ref, inView} = useInView();
 
-  const {title,price_max,price_min} = useFilter();
-  const { data,fetchNextPage, status, error } = useFetchProducts({ titleParam: title, price_minParam:price_min,price_maxParam:price_max });
-  const { isNear } = useNear();
+  console.log(data?.pages)
 
   useEffect(() => {
-    if (isNear) { fetchNextPage() }
+    if (inView) { fetchNextPage() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isNear])
+  }, [inView])
 
-  return status === "pending" ? <div>Loading...</div> :
+  return status === "pending" ? <Spinner isLoading={status === "pending"} /> :
     status === "error" ? <div>{error.message}</div> :
       <div className="w-full flex flex-col gap-2">
         {data.pages.map((page, currentPage) => <div key={currentPage} className="grid promo-grid place-items-center gap-3 w-full flex-1  px-4">
@@ -79,5 +53,6 @@ const Pagination: React.FC = () => {
             image={item.images[0]}
             category={item.category.name} />)}
         </div>)}
+        <div ref={ref}></div>
       </div>
 }

@@ -74,7 +74,7 @@ export const ProductGeneralInfo:React.FC = () => {
    
 
     return(
-        <section className="w-full min-h-screen flex items-center justify-center animate-fade">
+        <section className="w-full min-h-screen flex items-center justify-center animate-fadez">
             {
                 status === "pending" ? <p>Loading...</p> :
                 status === "error" ? <p>{error.message}</p> :
