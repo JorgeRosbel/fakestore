@@ -13,15 +13,15 @@ const  App:React.FC = () => {
   
         <Router>
           <Routes>
-            <Route path="/" element={
+            <Route path="/fakestore" element={
               <>
               <Header />
               <InitInfo/>
               
               </>
               } />
-            <Route path="/products" element={<> <Prodcuts /><Header /> </>} />
-            <Route path="/products/:name" element={<ProductGeneralInfo />} />
+            <Route path="/fakestore/products" element={<> <Prodcuts /><Header /> </>} />
+            <Route path="/fakestore/products/:name" element={<ProductGeneralInfo />} />
           </Routes>
         </Router>
         

@@ -11,9 +11,9 @@ import { Links } from "./menu.types";
 export const NavBar:React.FC<NavBarState> = ({visible}) => {
     
     const links:Links[] = [
-        {path: "/", text: "Home"},
-        {path: "/products", text: "Products"},
-        {path: "/contact", text: "Contact"}
+        {path: "/fakestore", text: "Home"},
+        {path: "/fakestore/products", text: "Products"},
+        {path: "/fakestore/contact", text: "Contact"}
     ]
 
     return(

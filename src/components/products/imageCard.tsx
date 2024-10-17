@@ -12,7 +12,7 @@ export const Image:React.FC<Omit<Promo, "category" | "price" >> = ({image,title}
             {isLoading && <div className="bg-light-accent dark:bg-dark-accent w-full h-full flex items-center justify-center">
                 <div className="w-[70px] h-[70px] border-solid border-[5px] border-light-secondary border-t-black dark:border-dark-white dark:border-t-yellow-500 rounded-full animate-spin"></div>
             </div>}
-            <Link to={`/products/${title}`} className="relative">
+            <Link to={`/fakestore/products/${title}`} className="relative">
             <img onLoad={handleLoadImage}
                 src={image}
                 width="100%"
