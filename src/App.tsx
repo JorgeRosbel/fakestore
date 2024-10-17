@@ -6,6 +6,7 @@ import { Prodcuts } from "./components/products/promoContent";
 import { ProductGeneralInfo } from "./components/products/productInfo";
 import { CategoryContent } from "./components/inicio/showCategory";
 import { SingleCategory } from "./components/inicio/showSingleCategory";
+import { DestacadosContent } from "./components/inicio/destacados";
 
 
 const  App:React.FC = () => {
@@ -19,6 +20,7 @@ const  App:React.FC = () => {
               <>
               <Header />
               <InitInfo/>
+              <DestacadosContent />
               <CategoryContent />
               </>
               } />

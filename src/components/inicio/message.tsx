@@ -15,11 +15,7 @@ export const Message:React.FC<{message:string}> = ({message}) => {
                         {message}
                 </span>
                 |
-                <span className="text-[18px]">
-                        {message}
-                </span>
-                |
-                <span className="text-[18px]">
+                <span className="text-[18px] hidden sm:block">
                         {message}
                 </span>
             </div>
