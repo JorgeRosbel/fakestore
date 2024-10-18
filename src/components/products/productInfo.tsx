@@ -121,6 +121,7 @@ const RelatedProducts:React.FC = () => {
 
 
 
+
     return(
         <div id="--related-products" className="w-full grid promo-grid gap-4 py-4">
             {
@@ -144,6 +145,10 @@ import { useCart } from "../../hooks/useCart";
 export const ProductGeneralInfo:React.FC = () => {
     const {name} = useParams();
     const {status,error,data} = useFetchSingleProduct({productName: name ? name: ""});
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
 
     return(
