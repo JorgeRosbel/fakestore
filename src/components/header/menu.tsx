@@ -17,7 +17,7 @@ export const NavBar:React.FC<NavBarState> = ({visible}) => {
     ]
 
     return(
-        <nav className={`flex flex-col z-20 gap-3 fixed overflow-hidden min-h-screen justify-center items-center bg-light-secondary lg:bg-white dark:bg-dark-primary
+        <nav className={`flex flex-col z-20 gap-3 fixed overflow-hidden min-h-screen justify-center items-center bg-light-secondary lg:bg-light-secondary dark:bg-dark-primary
         left-0 top-0 sm:flex sm:flex-row sm:static sm:min-h-min ${visible ? "w-[70%] sm:w-full" : "w-0 sm:w-full"} transition-all duration-300 sm:transition-none`}>
             {links.map((v,id) => <Link key={`link-menu-${id}`} to={v.path} className="text-black dark:text-white text-[18px] font-[600]">{v.text}</Link>)}
         </nav>

@@ -1,5 +1,5 @@
 import { Category } from "../../api/api.types";
-import { useNormalFetch } from "../../api/useNormalFetch";
+import { useFetchCategories } from "../../api/useFetchCategories";
 import { useState } from "react";
 import { Spinner } from "../products/imageCard";
 import { Link } from "react-router-dom";
@@ -30,7 +30,7 @@ const CategoryCard:React.FC<Category> = ({id,name,image}) => {
 
 
 export const CategoryContent:React.FC = () => {
-    const {status,error,data} = useNormalFetch();
+    const {status,error,data} = useFetchCategories();
 
     return status === "pending" ? <div>Loading...</div>:
     status === "error" ? <div>{error.message}</div>:

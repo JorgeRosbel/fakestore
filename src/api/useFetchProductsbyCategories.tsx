@@ -1,15 +1,16 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { Category } from "./api.types";
+import { Product } from "./api.types";
 
 
-export const useNormalFetch = () => {
+export const useFetchProductsbyCategories = (id:string) => {
 
-    const fetchFn = async (): Promise<Category[]> => {
-        const endpoint = `https://api.escuelajs.co/api/v1/categories`;
-
+    const endpoint = `https://api.escuelajs.co/api/v1/categories/${id}/products`;
+    
+    const fetchFn = async (): Promise<Product[]> => {
+        
         try {
-            const response = await axios.get<Category[]>(endpoint);
+            const response = await axios.get<Product[]>(endpoint);
             return response.data;
         }
         catch (error: unknown) {
@@ -26,7 +27,7 @@ export const useNormalFetch = () => {
 
 
     return useQuery({
-        queryKey:["all-products"],
+        queryKey:["product-by-categorires", id],
         queryFn: fetchFn,
         staleTime: 1000 * 60 * 60,
         refetchOnWindowFocus:false,

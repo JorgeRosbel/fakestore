@@ -35,7 +35,6 @@ export const Pagination: React.FC<Params> = ({titleParam,price_minParam,price_ma
   const { data,fetchNextPage, status, error } = useFetchProducts({ titleParam, price_minParam,price_maxParam,categoryId });
   const { ref, inView} = useInView();
 
-  console.log(data?.pages)
 
   useEffect(() => {
     if (inView) { fetchNextPage() }
@@ -48,10 +47,12 @@ export const Pagination: React.FC<Params> = ({titleParam,price_minParam,price_ma
         {data.pages.map((page, currentPage) => <div key={currentPage} className="grid promo-grid place-items-center gap-3 w-full flex-1  px-4">
           {page.map((item) => <ProductCard
             key={item.id}
+            id={item.id}
             title={item.title}
             price={item.price}
             image={item.images[0]}
-            category={item.category.name} />)}
+            category={item.category.name}
+            categoryID={item.category.id} />)}
         </div>)}
         <div ref={ref}></div>
       </div>

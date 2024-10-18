@@ -10,10 +10,11 @@ export const Destacados:React.FC<{productName:string}> = ({productName}) => {
                 status === "pending" ? <div>Loading...</div> :
                     status === "error" ? <div>{error.message}</div> :
                         <ProductCard
+                            id = {data[0].id}
                             title={data[0].title}
                             image={data[0].images[0]}
                             category={data[0].category.name}
-                            price={data[0].price} />
+                            price={data[0].price} categoryID={data[0].category.id} />
             }
         </>
     )

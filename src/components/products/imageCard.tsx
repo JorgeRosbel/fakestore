@@ -10,14 +10,14 @@ export const Spinner:React.FC<{isLoading:boolean}> = ({isLoading}) =>{
 </div>
 }
 
-export const Image:React.FC<Omit<Promo, "category" | "price" >> = ({image,title}) => {
+export const Image:React.FC<Omit<Promo,  "price" | "id" >> = ({image,title,category,categoryID}) => {
     const [isLoading,setIsloading] = useState<boolean>(true);
     const handleLoadImage = () => setIsloading(false);
 
     return (
-        <div className="w-[80%] min-h-[200px] min-w-[200px]" >
+        <div className="w-[80%] min-h-[200px] min-w-[200px]"  id={category}>
             <Spinner isLoading={isLoading}/>
-            <Link to={`/fakestore/products/${title}`} className="relative">
+            <Link to={`/fakestore/products/${title}/${categoryID}`} className="relative">
             <img onLoad={handleLoadImage}
                 src={image}
                 width="100%"

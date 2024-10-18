@@ -1,7 +1,10 @@
 import { Product } from "../../api/api.types";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 
+
 export const CardAction:React.FC<Omit<Product, "id" | "description" | "category" | "images" | "title">> = ({price}) => {
+
+   
 
     return (
         <div className="flex items-center justify-between w-full">

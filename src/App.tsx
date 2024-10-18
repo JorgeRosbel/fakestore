@@ -7,6 +7,8 @@ import { ProductGeneralInfo } from "./components/products/productInfo";
 import { CategoryContent } from "./components/inicio/showCategory";
 import { SingleCategory } from "./components/inicio/showSingleCategory";
 import { DestacadosContent } from "./components/inicio/destacados";
+import { Final } from "./components/inicio/final";
+import { Cart } from "./components/products/cart";
 
 
 const  App:React.FC = () => {
@@ -22,11 +24,13 @@ const  App:React.FC = () => {
               <InitInfo/>
               <DestacadosContent />
               <CategoryContent />
+              <Final />
               </>
               } />
             <Route path="/fakestore/products" element={<> <Prodcuts /><Header /> </>} />
-            <Route path="/fakestore/products/:name" element={<ProductGeneralInfo />} />
-            <Route path="/fakestore/category/:id" element={<SingleCategory />}/>
+            <Route path="/fakestore/products/:name/:id" element={<><Header /><ProductGeneralInfo /></>} />
+            <Route path="/fakestore/category/:id" element={<> <Header /><SingleCategory /></> }/>
+            <Route path="/fakestore/cart/" element={<Cart />}/>
           </Routes>
         </Router>
         
