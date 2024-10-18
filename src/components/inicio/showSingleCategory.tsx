@@ -11,3 +11,4 @@ export const SingleCategory:React.FC = () => {
         </div>
     )
 }
+

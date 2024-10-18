@@ -6,8 +6,10 @@ export const useFetchSingleProduct = ({productName}:{productName:string}) => {
 
     const endpoint = `https://api.escuelajs.co/api/v1/products/?title=${productName}`;
 
-    const fetchFn = async():Promise<Product[]> => {
+   
 
+    const fetchFn = async():Promise<Product[]> => {
+       
         try{
             const response = await axios.get<Product[]>(endpoint);
             return response.data;
