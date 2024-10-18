@@ -18,7 +18,7 @@ const CategoryCard:React.FC<Category> = ({id,name,image}) => {
                 height="100%"
                 onLoad={() => setLoading(false)}
                 className={`w-full aspect-square ${isLoading ? "hidden" : "block"}`} />
-            <Link to={`/fakestore/category/${id}`}>
+            <Link to={`/fakestore/category/${name}/${id}`}>
                 <div className="absolute top-0 left-0 p-3 bg-black bg-opacity-25 w-full h-full transition-all 
                 duration-500 hover:shadow-[5px_5px_20px_rgba(0,0,0,.3)] dark:hover:shadow-[10px_10px_20px_rgba(255,255,255,.3)]">
                     <p className="text-[22px] text-white">{name}</p>

@@ -29,7 +29,7 @@ const  App:React.FC = () => {
               } />
             <Route path="/fakestore/products" element={<> <Prodcuts /><Header /> </>} />
             <Route path="/fakestore/products/:name/:id" element={<><Header /><ProductGeneralInfo /></>} />
-            <Route path="/fakestore/category/:id" element={<> <Header /><SingleCategory /></> }/>
+            <Route path="/fakestore/category/:name/:id" element={<> <Header /><SingleCategory /></> }/>
             <Route path="/fakestore/cart/" element={<Cart />}/>
           </Routes>
         </Router>
