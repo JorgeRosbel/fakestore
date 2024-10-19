@@ -46,6 +46,29 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.no-spinner': {
+          '-webkit-appearance': 'none',
+          '-moz-appearance': 'textfield',
+        },
+        '.no-spinner::-webkit-inner-spin-button': {
+          '-webkit-appearance': 'none',
+          'margin': '0',
+        },
+        '.no-spinner::-webkit-outer-spin-button': {
+          '-webkit-appearance': 'none',
+          'margin': '0',
+        },
+        '.promo-grid': {
+          'grid-template-columns': 'repeat(auto-fill,minmax(250px,1fr))',
+          'grid-template-rows': 'repeat(auto-fill,minmax(250px,1fr))',
+        },
+      }
+
+      addUtilities(newUtilities)
+    }
+  ]
 }
 

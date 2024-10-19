@@ -4,6 +4,8 @@ import { ProductCard } from "../products/card";
 export const Destacados:React.FC<{productName:string}> = ({productName}) => {
     const {status,data,error} = useFetchSingleProduct({productName});
 
+    console.log(data)
+
     return(
         <>
             {
@@ -27,9 +29,9 @@ export const DestacadosContent:React.FC = () => {
             <h2 className="text-[30px] font-semibold text-black dark:text-white">Featured Products</h2>
             <div className="w-full max-w-[1200px] grid promo-grid gap-4">
                 <Destacados productName="Sleek Futuristic Electric Bicycle" />
-                <Destacados productName="Trendy Pink-Tinted Sunglasses" />
-                <Destacados productName="Sleek All-Terrain Go-Kart"/>
-                <Destacados productName="Sleek All-Terrain Go-Kart"/>
+                <Destacados productName="Rainbow Glitter High Heels" />
+                <Destacados productName="Elegant Purple Leather Loafers"/>
+                <Destacados productName="Radiant Citrus Eau de Parfum"/>
             </div>
         </section>
     )
