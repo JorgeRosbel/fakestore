@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { Promo } from "../components/products/card.types";
+import { Promo } from "@components/products/card.types";
 
-interface CartProduct extends Promo{
+export interface CartProduct extends Promo{
     id:number;
     amount:number;
 }
@@ -13,6 +13,7 @@ interface CartState{
     addProduct: (newProduct:CartProduct) => void;
     removeProduct: (productID:number) => void;
     deleteProduct: (productID:number) => void;
+    customAmount: (productID:number,quantity:number) => void;
     update: () => void;
 }
 
@@ -61,6 +62,15 @@ export const useCart = create<CartState>(set => ({
             return ({products: state.products.filter(product => product.id !== target?.id)}) 
         })
     },
+    customAmount: (productID,quantity) => {
+        set( state => {
+            
+            return ({products: state.products.map(product => 
+                product.id === productID 
+                ? {...product, amount: quantity} 
+                : product)})
+        })
+    } ,
     update: () => {
         set( state => {
             const total_amount = state.products.reduce((acc,current) =>  acc + (current.price * current.amount) , 0 );
