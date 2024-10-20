@@ -6,6 +6,8 @@ export interface CartProduct extends Promo{
     amount:number;
 }
 
+export type Sort = "price" | "quantitiy" | "product" ;
+
 interface CartState{
     products:CartProduct[];
     total: number,
@@ -15,6 +17,7 @@ interface CartState{
     deleteProduct: (productID:number) => void;
     customAmount: (productID:number,quantity:number) => void;
     update: () => void;
+    sortBy: (mode:Sort) => void;
 }
 
 export const useCart = create<CartState>(set => ({
@@ -78,6 +81,37 @@ export const useCart = create<CartState>(set => ({
 
             return ({total: total_amount ,counter: counter })
         } )
+    },
+    sortBy: (mode) => {
+
+        set( state => {
+
+            if(mode === "price"){
+                const newProducts = state.products.sort((a, b) => b.price - a.price);
+                return ({products: newProducts})
+            }
+            else if(mode === "quantitiy"){
+                const newProducts = state.products.sort((a, b) => b.amount - a.amount);
+                return ({products: newProducts})
+            }
+            else if(mode === "product"){
+                const newProducts = state.products.sort((a, b) => {
+                    if (a.title > b.title) {
+                      return 1;
+                    }
+                    if (a.title < b.title) {
+                      return -1;
+                    }
+                    // a must be equal to b
+                    return 0;
+                  });
+                return ({products: newProducts})
+            }
+            else{
+                return ({products: state.products})
+            }
+
+        })
     }
 
 }))
