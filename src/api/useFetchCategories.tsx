@@ -14,12 +14,12 @@ export const useFetchCategories = () => {
         }
         catch (error: unknown) {
             if (error instanceof Error) {
-                throw new Error("Error al obtener los productos " + error.message)
+                throw new Error("Error fetching the products: " + error.message)
             } else if (axios.isAxiosError(error)) {
-                throw new Error("Error al obtener los productos " + error.message)
+                throw new Error("Error fetching the products: " + error.message)
             }
             else {
-                throw new Error("Error al obtener los productos")
+                throw new Error("Error fetching the products")
             }
         }
     }

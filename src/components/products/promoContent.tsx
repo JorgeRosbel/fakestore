@@ -5,7 +5,7 @@ import { FormFilter } from "./formFilter";
 import { useFilter } from "../../hooks/useFilter";
 import { useInView } from "react-intersection-observer";
 import { Params } from "../../api/useFetchProducts";
-import { Spinner } from "./imageCard";
+import { ProductCardSkelleton } from "./card";
 
 export const Prodcuts:React.FC = () => {
     const {title,price_max,price_min} = useFilter();
@@ -41,8 +41,17 @@ export const Pagination: React.FC<Params> = ({titleParam,price_minParam,price_ma
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
 
-  return status === "pending" ? <Spinner isLoading={status === "pending"} /> :
-    status === "error" ? <div>{error.message}</div> :
+  return status === "pending" ? <div  className="grid promo-grid place-items-center gap-3 w-full flex-1  px-4">
+    <ProductCardSkelleton />
+    <ProductCardSkelleton />
+    <ProductCardSkelleton />
+    <ProductCardSkelleton />
+    <ProductCardSkelleton />
+    <ProductCardSkelleton />
+   
+ 
+  </div> :
+    status === "error" ? <p className="text-red-600 font-bold">{error.message}</p> :
       <div className="w-full flex flex-col gap-2">
         {data.pages.map((page, currentPage) => <div key={currentPage} className="grid promo-grid place-items-center gap-3 w-full flex-1  px-4">
           {page.map((item) => <ProductCard
