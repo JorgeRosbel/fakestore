@@ -29,7 +29,7 @@ export const Order:React.FC = () => {
     ]
 
     return(
-        <div className="flex-1 flex items-center flex-col bg-light-secondary dark:bg-dark-secondary p-3 gap-3 animate-fade">
+        <div className="w-full h-min fixed bottom-0 sm:static sm:flex-1 flex items-center flex-col bg-light-secondary dark:bg-dark-secondary p-3 gap-3 animate-fade">
             <h2 className="text-center font-semibold text-[1.2rem] text-black dark:text-white">Your Order</h2>
             
             <div className="w-full">
@@ -47,3 +47,5 @@ export const Order:React.FC = () => {
         </div>
     )
 }
+
+

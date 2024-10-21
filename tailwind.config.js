@@ -10,9 +10,15 @@ export default {
     animation: {
       fade: "fade 1s linear",
       spin: "spin 2s linear infinite",
-      slider:"slider 16s linear infinite"
+      slider:"slider 16s linear infinite",
+      pulse: "pulse 2s linear infinite"
     },
     keyframes:{
+      pulse:{
+        "0%":{ opacity: 0.3 },
+        "50%": { opacity:  1 },
+        "100%": { opacity:  0.3 }
+      },
       fade:{
         "0%":{ opacity: 0 },
         "100%": { opacity:  1 }

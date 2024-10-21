@@ -3,6 +3,7 @@ import { useFetchCategories } from "../../api/useFetchCategories";
 import { useState } from "react";
 import { Spinner } from "../products/imageCard";
 import { Link } from "react-router-dom";
+import { BsImage } from "react-icons/bs";
 
 const CategoryCard:React.FC<Category> = ({id,name,image}) => {
     const [isLoading,setLoading] = useState<boolean>(true);
@@ -28,12 +29,33 @@ const CategoryCard:React.FC<Category> = ({id,name,image}) => {
     )
 }
 
+const CategoryCardSkelleton:React.FC = () => {
+   
+    return(
+        <article className=" min-h-[200px] bg-light-accent dark:bg-dark-secondary min-w-[200px]
+         relative flex flex-col items-center justify-center">
+            
+            <div className="w-full h-full bg-slate-400 animate-pulse flex items-center justify-center">
+                <BsImage  className="text-[50px] text-slate-600 text-opacity-75" />
+            </div>
+        </article>
+    )
+}
+
 
 export const CategoryContent:React.FC = () => {
     const {status,error,data} = useFetchCategories();
 
-    return status === "pending" ? <div>Loading...</div>:
-    status === "error" ? <div>{error.message}</div>:
+    return status === "pending" ?  <div className="w-full max-w-[1200px] flex flex-col items-center justify-center py-3">
+        <h2 className="text-[30px] font-semibold text-black dark:text-white">Categories</h2>
+    <div className="w-full p-4 grid promo-grid place-content-center gap-3">
+    <CategoryCardSkelleton />
+    <CategoryCardSkelleton />
+    <CategoryCardSkelleton />
+    <CategoryCardSkelleton />
+    </div>
+</div>:
+    status === "error" ? <div className="text-red-600 font-bold">{error.message}</div>:
     <div className="w-full max-w-[1200px] flex flex-col items-center justify-center py-3">
         <h2 className="text-[30px] font-semibold text-black dark:text-white">Categories</h2>
         <div className="w-full p-4 grid promo-grid place-content-center gap-3">

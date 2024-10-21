@@ -1,16 +1,18 @@
 import { useFetchSingleProduct } from "../../api/useFetchSingleProdcut";
-import { ProductCard } from "../products/card";
+import { ProductCard, ProductCardSkelleton } from "../products/card";
 
 export const Destacados:React.FC<{productName:string}> = ({productName}) => {
     const {status,data,error} = useFetchSingleProduct({productName});
 
-    console.log(data)
 
     return(
         <>
             {
-                status === "pending" ? <div>Loading...</div> :
-                    status === "error" ? <div>{error.message}</div> :
+                status === "pending" ? <div  className="grid promo-grid place-items-center gap-3 w-full flex-1  px-4">
+                <ProductCardSkelleton />
+              
+                </div> :
+                    status === "error" ? <p className="text-red-600 font-bold">{error.message}</p> :
                         <ProductCard
                             id = {data[0].id}
                             title={data[0].title}
